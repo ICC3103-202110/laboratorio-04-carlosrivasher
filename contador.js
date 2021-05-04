@@ -1,29 +1,33 @@
-function view(counter){
-    return (`Count: ${counter}\n
+const prompt = require('prompt-sync')({sigint: true});
+const view = counter => {
+    return `    Count: ${counter}\n
     (+) (-)\n
-    (q)  for quit \n`)
+    (q) for quit \n`;
 };
 
-function update(msg, counter){
-    if(msg=='+'){
-        return counter + 1
+const update = (msg, counter) => {
+    if (msg==='+') {
+        return counter + 1;
     }
-    if(msg=='-'){
-        return counter - 1
+    if (msg==='-') {
+        return counter - 1;
+    }
+    if (msg==='q') {
+        process.exit();
     }
     else{
-        return counter
+        return counter;
     }
 };
 
-function app(counter){
+const app = counter => {
     while(true){
         const currentView = view(counter);
         console.clear();
         console.log(currentView);
-        const msg = userInput
+        const msg = prompt('What would you do? ');
         counter = update(msg, counter); 
     }
-};
+}
 
 app(0)
